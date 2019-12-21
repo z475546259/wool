@@ -25,10 +25,13 @@ public class TestSign {
 ////        String aa = HmacSHA256.getHmacSHA256("1575033647", "yunscsginkey");
 //        System.out.println(aa);
 //
-////        fb3c7efe876e781007a4ac8e1a2ffd9dd199f639176a4b4f24a4d6b280bac417,1575033619
-//        String bb = HmacSHA256.getHmacSHA256("1575033619"+ "test="+"ae4207657e41a6a47b3bcd748ac77746", "q781cXa9Z8hp0Z7aJL8ssG5oiP1R9nA7");
+////        f15c0f412d41ace1c40b3b8add6696d3c2bb67cf61085373a569df12c9f3c505,1576652001
+        String serNum = "CEC30CB8-5104-4D79-8AE7-80A5305C6D50";
+        serNum =  serNum.replace("-","").toLowerCase();
+        System.out.println(serNum);
+        String bb = HmacSHA256.getHmacSHA256("1576652001"+ "password=475546259&username=15923584508"+serNum, "q781cXa9Z8hp0Z7aJL8ssG5oiP1R9nA7");
 ////        String aa = HmacSHA256.getHmacSHA256("1575033647", "yunscsginkey");
-//        System.out.println(bb);
+        System.out.println(bb);
 //        bb = HmacSHA256.getHmacSHA256("1575033647"+"ae4207657e41a6a47b3bcd748ac77746", "aV2woc00FmtOi8HCLsbPMQD0iih0vQ3h");
 ////        String aa = HmacSHA256.getHmacSHA256("1575033647", "yunscsginkey");
 //        System.out.println(bb);
@@ -49,7 +52,7 @@ public class TestSign {
 ////        System.out.println(cc);
 ////        System.out.println("a3ef8c798f34c23d4b699cea24d79fe0bd2d337343e8945e76fe41e7ecd3eb6e".length());
 ////        System.out.println("5f22e2f39c01bbee901e550e19a009b6ba7365da74b8617f7504ee14fb2a3d7d".length());
-        System.out.println(System.currentTimeMillis()/1000);
+        System.out.println("Z红违规"+System.currentTimeMillis()/1000);
     }
     public static String aa(String a,String b){
         return a+b;

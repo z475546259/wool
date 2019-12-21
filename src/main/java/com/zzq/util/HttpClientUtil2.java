@@ -26,11 +26,11 @@ import java.util.zip.GZIPInputStream;
 /*
  * 薅羊毛的单元
  */
-public class HttpClientUtil {
+public class HttpClientUtil2 {
     String yunscsginkey = "q781cXa9Z8hp0Z7aJL8ssG5oiP1R9nA7";
     String yunsckey = "aV2woc00FmtOi8HCLsbPMQD0iih0vQ3h";
     String Authorization = "";
-    private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(HttpClientUtil.class);
+    private static org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(HttpClientUtil2.class);
     private HttpClient httpClient = null;
     public List<String> cookies =new ArrayList<String>();
     HttpHost target = new HttpHost("127.0.0.1", 8888,  "http");
@@ -64,7 +64,7 @@ public class HttpClientUtil {
     public void setCnUserID(String cnUserID) {
         this.cnUserID = cnUserID;
     }
-    public HttpClientUtil(){
+    public HttpClientUtil2(){
         try {
             this.httpClient =  new SSLClient();
         } catch (Exception e) {
@@ -80,25 +80,30 @@ public class HttpClientUtil {
 //            httpClient = new SSLClient();
             httpPost = new HttpPost(url);
             // 设置通用的请求属性
-            httpPost.addHeader("Accept-Encoding","gzip");
-            httpPost.addHeader("User-Agent","okhttp/3.10.0");
+            httpPost.addHeader("Accept","*/*");
+            httpPost.addHeader("Accept-Encoding","gzip, deflate");
+            httpPost.addHeader("Accept-Language","zh-Hans-HK;q=1");
+            httpPost.addHeader("User-Agent","YshanChong/2.0.2 (iPhone; iOS 12.4.1; Scale/3.00)");
+            //post的通用方式設置
             httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-            httpPost.addHeader("Connection","Keep-Alive");
-            httpPost.addHeader("Host","api.shanchong.mobi");
+            //transport的通用設置
+            httpPost.addHeader("Connection","keep-alive");
+            httpPost.addHeader("Connection","keep-alive");
+            httpPost.addHeader("Host","apis.shanchong.mobi");
             //用户的静态头属性
             httpPost.addHeader("X-ECAPI-Authorization",Authorization);
-            httpPost.addHeader("X-ECAPI-IMEI","868334046581256");
-            httpPost.addHeader("X-ECAPI-SerialNumber","ae4207657e41a6a47b3bcd748ac77746");
-            httpPost.addHeader("X-ECAPI-UDID","VTTdaQgPfVF9wScHAXkMtYsHztsGumgP");
-            httpPost.addHeader("X-ECAPI-UserAgent","Platform/Android, Device/HRYAL00, Lang/zh-CN, ScreenWidth/1080, ScreenHeight/2259");
-            httpPost.addHeader("X-ECAPI-Ver","1.1.9");
+            httpPost.addHeader("X-ECAPI-IMEI","5497D697-0552-4342-8E71-7044D2544C7C");
+            httpPost.addHeader("X-ECAPI-SerialNumber","CEC30CB8-5104-4D79-8AE7-91B6416D7E61");
+            httpPost.addHeader("X-ECAPI-UDID","xmYE1GvReR9j2t5FIitvqX43ekGIxEt2");
+            httpPost.addHeader("X-ECAPI-UserAgent","Platform/iOS, Device/iPhone, Lang/zh-Hans-HK, ScreenWidth/414.000000, ScreenHeight/736.000000, timestamp/1571715984");
+            httpPost.addHeader("X-ECAPI-Ver","2.0.2");
             //动态签名头属性
             Long currentTimeStr  = System.currentTimeMillis()/1000;
             String str = "";
             if(map.size()>0){
                 str = XXTEA.decryptBase64StringToString(map.get("x"),"aV2woc00FmtOi8HCLsbPMQD0iih0vQ3h");
             }
-            String signStr =  HmacSHA256.getHmacSHA256(currentTimeStr+ str+"ae4207657e41a6a47b3bcd748ac77746", yunscsginkey)+","+currentTimeStr;
+            String signStr =  HmacSHA256.getHmacSHA256(currentTimeStr+ str, yunscsginkey)+","+currentTimeStr;
             httpPost.addHeader("X-ECAPI-Sign",signStr);
 
             List<NameValuePair> list = new ArrayList<NameValuePair>();

@@ -12,13 +12,13 @@ import java.util.Map;
 public class HttpRequest {
 	public static URLConnection connection;
     /**
-     * ÏòÖ¸¶¨URL·¢ËÍGET·½·¨µÄÇëÇó
+     * å‘æŒ‡å®šURLå‘é€GETæ–¹æ³•çš„è¯·æ±‚
      * 
      * @param url
-     *            ·¢ËÍÇëÇóµÄURL
+     *            å‘é€è¯·æ±‚çš„URL
      * @param param
-     *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-     * @return URL Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+     *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+     * @return URL æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
      */
     public static String sendGet(URLConnection connection,String url, String param) {
         String result = "";
@@ -26,9 +26,9 @@ public class HttpRequest {
         try {
             String urlNameString = url + "?" + param;
             URL realUrl = new URL(urlNameString);
-            // ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+            // æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
             connection = realUrl.openConnection();
-            // ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+            // è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
             connection.setRequestProperty("accept","application/json");
             connection.setRequestProperty("Accept-Encoding","gzip");
             connection.setRequestProperty("user-agent","Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
@@ -45,15 +45,15 @@ public class HttpRequest {
             connection.setRequestProperty("Connection","Keep-Alive");
             connection.setRequestProperty("Host","app.cainiaolc.com");
             
-            // ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+            // å»ºç«‹å®é™…çš„è¿æ¥
             connection.connect();
-            // »ñÈ¡ËùÓĞÏìÓ¦Í·×Ö¶Î
+            // è·å–æ‰€æœ‰å“åº”å¤´å­—æ®µ
             Map<String, List<String>> map = connection.getHeaderFields();
-            // ±éÀúËùÓĞµÄÏìÓ¦Í·×Ö¶Î
+            // éå†æ‰€æœ‰çš„å“åº”å¤´å­—æ®µ
             for (String key : map.keySet()) {
                 System.out.println(key + "--->" + map.get(key));
             }
-            // ¶¨Òå BufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+            // å®šä¹‰ BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream(),"utf-8"));
             String line;
@@ -61,10 +61,10 @@ public class HttpRequest {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("·¢ËÍGETÇëÇó³öÏÖÒì³££¡" + e);
+            System.out.println("å‘é€GETè¯·æ±‚å‡ºç°å¼‚å¸¸ï¼" + e);
             e.printStackTrace();
         }
-        // Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷
+        // ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å…¥æµ
         finally {
             try {
                 if (in != null) {
@@ -78,13 +78,13 @@ public class HttpRequest {
     }
 
     /**
-     * ÏòÖ¸¶¨ URL ·¢ËÍPOST·½·¨µÄÇëÇó
+     * å‘æŒ‡å®š URL å‘é€POSTæ–¹æ³•çš„è¯·æ±‚
      * 
      * @param url
-     *            ·¢ËÍÇëÇóµÄ URL
+     *            å‘é€è¯·æ±‚çš„ URL
      * @param param
-     *            ÇëÇó²ÎÊı£¬ÇëÇó²ÎÊıÓ¦¸ÃÊÇ name1=value1&name2=value2 µÄĞÎÊ½¡£
-     * @return Ëù´ú±íÔ¶³Ì×ÊÔ´µÄÏìÓ¦½á¹û
+     *            è¯·æ±‚å‚æ•°ï¼Œè¯·æ±‚å‚æ•°åº”è¯¥æ˜¯ name1=value1&name2=value2 çš„å½¢å¼ã€‚
+     * @return æ‰€ä»£è¡¨è¿œç¨‹èµ„æºçš„å“åº”ç»“æœ
      */
     public static String sendPost(URLConnection connection,String url, String param) {
         PrintWriter out = null;
@@ -92,9 +92,9 @@ public class HttpRequest {
         String result = "";
         try {
             URL realUrl = new URL(url);
-            // ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+            // æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
             connection = realUrl.openConnection();
-            // ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+            // è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
             connection.setRequestProperty("accept","application/json");
             connection.setRequestProperty("Accept-Encoding","gzip");
             connection.setRequestProperty("user-agent","Dalvik/2.1.0 (Linux; U; Android 6.0.1; Redmi 4A MIUI/V8.5.4.0.MCCCNED)");
@@ -110,16 +110,16 @@ public class HttpRequest {
             connection.setRequestProperty("deviceid","31d2b13db676f532");
             connection.setRequestProperty("Connection","Keep-Alive");
             connection.setRequestProperty("Host","app.cainiaolc.com");
-            // ·¢ËÍPOSTÇëÇó±ØĞëÉèÖÃÈçÏÂÁ½ĞĞ
+            // å‘é€POSTè¯·æ±‚å¿…é¡»è®¾ç½®å¦‚ä¸‹ä¸¤è¡Œ
             connection.setDoOutput(true);
             connection.setDoInput(true);
-            // »ñÈ¡URLConnection¶ÔÏó¶ÔÓ¦µÄÊä³öÁ÷
+            // è·å–URLConnectionå¯¹è±¡å¯¹åº”çš„è¾“å‡ºæµ
             out = new PrintWriter(connection.getOutputStream());
-            // ·¢ËÍÇëÇó²ÎÊı
+            // å‘é€è¯·æ±‚å‚æ•°
             out.print(param);
-            // flushÊä³öÁ÷µÄ»º³å
+            // flushè¾“å‡ºæµçš„ç¼“å†²
             out.flush();
-            // ¶¨ÒåBufferedReaderÊäÈëÁ÷À´¶ÁÈ¡URLµÄÏìÓ¦
+            // å®šä¹‰BufferedReaderè¾“å…¥æµæ¥è¯»å–URLçš„å“åº”
             in = new BufferedReader(
                     new InputStreamReader(connection.getInputStream(),"utf-8"));
             String line;
@@ -127,10 +127,10 @@ public class HttpRequest {
                 result += line;
             }
         } catch (Exception e) {
-            System.out.println("·¢ËÍ POST ÇëÇó³öÏÖÒì³££¡"+e);
+            System.out.println("å‘é€ POST è¯·æ±‚å‡ºç°å¼‚å¸¸ï¼"+e);
             e.printStackTrace();
         }
-        //Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊä³öÁ÷¡¢ÊäÈëÁ÷
+        //ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å‡ºæµã€è¾“å…¥æµ
         finally{
             try{
                 if(out!=null){
@@ -147,11 +147,11 @@ public class HttpRequest {
         return result;
     } 
 //    public static void main(String[] args) {
-//        //·¢ËÍ GET ÇëÇó
+//        //å‘é€ GET è¯·æ±‚
 //        String s=HttpRequest.sendGet("http://www.baidu.com", "key=123&v=456");
 //        System.out.println(s);
 //        
-//        //·¢ËÍ POST ÇëÇó
+//        //å‘é€ POST è¯·æ±‚
 //        String sr=HttpRequest.sendPost("http://www.baidu.com", "key=123&v=456");
 //        System.out.println(sr);
 //    }
